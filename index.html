@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vishnu Turns 50 — You're Summoned!</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Georgia', serif; background: #fefbea; color: #1a1a2e; min-height: 100vh; }
+
+  /* BANNER */
+  .banner-img { width: 100%; display: block; max-height: 420px; object-fit: cover; object-position: center top; }
+
+  /* HERO */
+  .hero {
+    background: linear-gradient(160deg, #1a1a6e 0%, #2c2c9e 50%, #1a1a6e 100%);
+    color: #fff; text-align: center; padding: 60px 20px 70px; position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 30% 40%, rgba(255,215,0,0.12), transparent 60%),
+                radial-gradient(ellipse at 70% 60%, rgba(255,215,0,0.08), transparent 55%);
+  }
+  .hero-tag {
+    display: inline-block; background: rgba(255,215,0,0.18); border: 1.5px solid rgba(255,215,0,0.5);
+    color: #ffd700; font-size: 0.82rem; letter-spacing: 0.18em; text-transform: uppercase;
+    padding: 6px 20px; border-radius: 40px; margin-bottom: 28px; position: relative;
+  }
+  .hero h1 { font-size: clamp(2.8rem, 8vw, 5.5rem); font-weight: 700; line-height: 1.05; position: relative; margin-bottom: 10px; }
+  .hero h1 span { color: #ffd700; }
+  .hero-sub { font-size: clamp(1rem, 3vw, 1.35rem); color: rgba(255,255,255,0.82); font-style: italic; margin-bottom: 36px; position: relative; }
+  .stars { font-size: 1.6rem; letter-spacing: 6px; color: #ffd700; position: relative; margin-bottom: 32px; }
+  .hero-details {
+    display: inline-flex; flex-wrap: wrap; justify-content: center; gap: 12px 32px;
+    background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15);
+    padding: 18px 36px; border-radius: 16px; position: relative;
+  }
+  .hero-details .label { font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: #ffd700; margin-bottom: 4px; }
+  .hero-details .value { font-size: 1.05rem; font-weight: 600; color: #fff; }
+  .divider { width: 1px; background: rgba(255,255,255,0.2); align-self: stretch; }
+
+  /* SECTIONS */
+  .section { max-width: 780px; margin: 0 auto; padding: 60px 24px; }
+  .section-badge {
+    display: inline-block; background: #1a1a6e; color: #ffd700;
+    font-size: 0.75rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
+    padding: 5px 16px; border-radius: 30px; margin-bottom: 14px;
+  }
+  .section h2 { font-size: clamp(1.6rem, 4vw, 2.2rem); color: #1a1a6e; margin-bottom: 18px; line-height: 1.2; }
+  .section p { font-size: 1.05rem; line-height: 1.8; color: #333; margin-bottom: 14px; }
+
+  /* VIBE */
+  .vibe-strip { background: #1a1a6e; color: #fff; padding: 48px 24px; }
+  .vibe-inner { max-width: 780px; margin: 0 auto; text-align: center; }
+  .vibe-inner h2 { font-size: clamp(1.5rem, 4vw, 2rem); margin-bottom: 20px; color: #ffd700; }
+  .vibe-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; margin-top: 28px; }
+  .vibe-card { background: rgba(255,255,255,0.07); border: 1px solid rgba(255,215,0,0.25); border-radius: 14px; padding: 20px 16px; text-align: center; }
+  .vibe-card .icon { font-size: 2rem; margin-bottom: 10px; }
+  .vibe-card .vibe-title { font-size: 0.95rem; font-weight: 600; color: #ffd700; margin-bottom: 6px; }
+  .vibe-card .vibe-desc { font-size: 0.85rem; color: rgba(255,255,255,0.7); line-height: 1.6; }
+
+  /* FOOD */
+  .food-section { background: #fffdf0; border-top: 2px solid #ffd700; border-bottom: 2px solid #ffd700; }
+
+  /* LOCATION */
+  .loc-box {
+    background: #fff; border: 1.5px solid #d0c9f0; border-radius: 18px; padding: 28px 24px;
+    margin-top: 24px; display: flex; flex-wrap: wrap; gap: 20px; align-items: flex-start;
+  }
+  .loc-pin { font-size: 2.8rem; flex-shrink: 0; }
+  .loc-text h3 { font-size: 1.1rem; color: #1a1a6e; margin-bottom: 6px; }
+  .loc-text p { font-size: 0.95rem; color: #444; line-height: 1.7; margin: 0; }
+  .map-link {
+    display: inline-block; margin-top: 12px; background: #1a1a6e; color: #ffd700;
+    font-size: 0.85rem; font-weight: 600; padding: 8px 20px; border-radius: 30px; text-decoration: none;
+  }
+
+  /* WORDS */
+  .words-section { background: #f0edff; }
+  .word-inputs { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 12px; margin: 24px 0 10px; }
+  .word-inputs input {
+    width: 100%; padding: 12px 16px; border: 2px solid #c5bbf5; border-radius: 10px;
+    font-size: 1rem; font-family: 'Georgia', serif; background: #fff; color: #1a1a2e;
+    text-align: center; outline: none; transition: border-color 0.2s;
+  }
+  .word-inputs input:focus { border-color: #1a1a6e; }
+  .word-inputs input::placeholder { color: #aaa; font-style: italic; }
+  .name-input {
+    width: 100%; padding: 12px 16px; border: 2px solid #c5bbf5; border-radius: 10px;
+    font-size: 1rem; font-family: 'Georgia', serif; background: #fff; color: #1a1a2e;
+    outline: none; transition: border-color 0.2s; margin-bottom: 16px;
+  }
+  .name-input:focus { border-color: #1a1a6e; }
+  .name-input::placeholder { color: #aaa; font-style: italic; }
+  .generate-btn {
+    display: block; width: 100%; background: #1a1a6e; color: #ffd700; border: none;
+    border-radius: 14px; padding: 16px; font-size: 1.05rem; font-weight: 700;
+    font-family: 'Georgia', serif; cursor: pointer; transition: background 0.2s, transform 0.1s; margin-top: 6px;
+  }
+  .generate-btn:hover { background: #2c2c9e; }
+  .generate-btn:active { transform: scale(0.98); }
+
+  /* WORD WALL */
+  .word-wall { margin-top: 32px; }
+  .word-wall h3 { font-size: 1rem; color: #1a1a6e; margin-bottom: 16px; font-weight: 600; letter-spacing: 0.05em; }
+  .word-wall-entries { display: flex; flex-direction: column; gap: 14px; }
+  .word-entry { background: #fff; border: 1.5px solid #d0c9f0; border-radius: 14px; padding: 16px 20px; }
+  .word-entry .from-name { font-size: 0.78rem; color: #888; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 10px; font-weight: 700; }
+  .word-tags-row { display: flex; flex-wrap: wrap; gap: 8px; }
+  .word-tag { background: #1a1a6e; color: #ffd700; border-radius: 30px; padding: 5px 14px; font-size: 0.88rem; font-weight: 600; }
+  .submit-notice { font-size: 0.85rem; color: #1a1a6e; text-align: center; margin-top: 12px; font-style: italic; }
+
+  /* RSVP */
+  .rsvp-section { background: #1a1a6e; }
+  .rsvp-section .section-badge { background: #ffd700; color: #1a1a6e; }
+  .rsvp-section h2 { color: #ffd700; }
+  .rsvp-section p { color: rgba(255,255,255,0.8); }
+  .rsvp-form { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,215,0,0.25); border-radius: 20px; padding: 32px; margin-top: 28px; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media (max-width: 520px) { .form-row { grid-template-columns: 1fr; } }
+  .form-group { margin-bottom: 18px; }
+  .form-group label { display: block; font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; color: #ffd700; margin-bottom: 8px; font-weight: 600; }
+  .form-group input, .form-group select, .form-group textarea {
+    width: 100%; background: rgba(255,255,255,0.08); border: 1.5px solid rgba(255,255,255,0.2);
+    border-radius: 10px; padding: 12px 16px; font-size: 0.97rem; font-family: 'Georgia', serif;
+    color: #fff; outline: none; transition: border-color 0.2s;
+  }
+  .form-group input::placeholder, .form-group textarea::placeholder { color: rgba(255,255,255,0.35); }
+  .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: #ffd700; }
+  .form-group select option { background: #1a1a6e; color: #fff; }
+  .form-group textarea { resize: vertical; min-height: 90px; }
+  .submit-btn {
+    width: 100%; background: #ffd700; color: #1a1a2e; border: none; border-radius: 14px;
+    padding: 18px; font-size: 1.1rem; font-weight: 700; font-family: 'Georgia', serif;
+    cursor: pointer; margin-top: 6px; transition: background 0.2s, transform 0.1s;
+  }
+  .submit-btn:hover { background: #ffe033; }
+  .submit-btn:active { transform: scale(0.98); }
+
+  /* FOOTER */
+  .footer { text-align: center; padding: 36px 20px; background: #111140; color: rgba(255,255,255,0.5); font-size: 0.88rem; }
+  .footer .gold { color: #ffd700; font-weight: 600; }
+  .sep { text-align: center; padding: 8px; color: #ffd700; font-size: 1.4rem; letter-spacing: 8px; background: #fefbea; }
+</style>
+</head>
+<body>
+
+<!-- BANNER IMAGE -->
+<img class="banner-img" src="BANNER_PLACEHOLDER" alt="Vishnu's 50th Birthday">
+
+<!-- HERO -->
+<!-- BANNER IMAGE -->
+<div style="width:100%; max-height:420px; overflow:hidden; line-height:0;">
+  <img src="vishnu_banner.jpg" alt="Vishnu's 50th Birthday" style="width:100%; object-fit:cover; object-position:center top; display:block;">
+</div>
+<section class="hero">
+  <div class="hero-tag">You are hereby officially summoned</div>
+  <h1>Vishnu Turns <span>50!</span></h1>
+  <p class="hero-sub">Half a century of wisdom, wit, and perfectly timed one-liners.</p>
+  <div class="stars">★ ★ ★ ★ ★</div>
+  <div class="hero-details">
+    <div class="detail">
+      <div class="label">Date</div>
+      <div class="value">Friday, May 23rd</div>
+    </div>
+    <div class="divider"></div>
+    <div class="detail">
+      <div class="label">Time</div>
+      <div class="value">6:00 PM – 11:00 PM</div>
+    </div>
+    <div class="divider"></div>
+    <div class="detail">
+      <div class="label">Where</div>
+      <div class="value">3363 Sagewood Ct, Pleasanton</div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="section">
+  <div class="section-badge">The occasion</div>
+  <h2>Fifty years of Vishnu — and counting.</h2>
+  <p>Vishnu is turning 50. Which means… 50 years of stories, sharp logic, and perfectly timed one-liners.</p>
+  <p>No DJ. No dance floor. No pressure.</p>
+  <p>Just a room full of people who know Vishnu well enough to laugh before he even finishes the sentence. Just good food, great company, and conversations that slowly turn into uncontrollable laughter.</p>
+  <p style="font-size: 1.15rem; font-weight: 700; color: #1a1a6e; font-style: italic;">
+    "Leave your dancing shoes at home. Bring your funny bone, your best story about Vishnu, and a completely straight face while telling it."
+  </p>
+</section>
+
+<div class="sep">· · ·</div>
+
+<!-- VIBE -->
+<section class="vibe-strip">
+  <div class="vibe-inner">
+    <div style="display:inline-block; background:rgba(255,215,0,0.15); border:1px solid rgba(255,215,0,0.4); color:#ffd700; font-size:0.75rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; padding:5px 16px; border-radius:30px; margin-bottom:14px;">The vibe</div>
+    <h2>What to expect</h2>
+    <p style="color:rgba(255,255,255,0.75); font-size:1rem; max-width:520px; margin:0 auto;">This is a sit-down-and-laugh kind of party. No DJ. No dance floor. Just great company, great food, and great stories.</p>
+    <div class="vibe-grid">
+      <div class="vibe-card">
+        <div class="icon">😂</div>
+        <div class="vibe-title">Funny Bone Required</div>
+        <div class="vibe-desc">Come armed with your best Vishnu story. The more embarrassing, the better.</div>
+      </div>
+      <div class="vibe-card">
+        <div class="icon">🪑</div>
+        <div class="vibe-title">Sit & Stay Awhile</div>
+        <div class="vibe-desc">We're the sit-in-a-circle-and-laugh type. Your feet will thank you.</div>
+      </div>
+      <div class="vibe-card">
+        <div class="icon">🎤</div>
+        <div class="vibe-title">Stories Welcome</div>
+        <div class="vibe-desc">Got a memory, a roast, or a speech? You'll have the floor (briefly — we know who goes on too long).</div>
+      </div>
+      <div class="vibe-card">
+        <div class="icon">🎂</div>
+        <div class="vibe-title">Cake. Obviously.</div>
+        <div class="vibe-desc">50 candles. 50 wishes. One very important fire extinguisher on standby.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOD -->
+<section class="section food-section">
+  <div class="section-badge">Fuel for the funny</div>
+  <h2>Food & feast</h2>
+  <p>We're feeding you well — because you can't laugh on an empty stomach. Expect a proper spread that'll keep you happily planted in your seat all evening.</p>
+  <p style="margin-top: 8px; font-style: italic; color: #555; font-size: 0.95rem;">
+    Please let us know about any dietary restrictions in your RSVP — nobody goes hungry at this party.
+  </p>
+</section>
+
+<div class="sep">· · ·</div>
+
+<!-- LOCATION -->
+<section class="section">
+  <div class="section-badge">Getting here</div>
+  <h2>Find us</h2>
+  <p>We're hosting at home — because the best parties happen in living rooms, not banquet halls.</p>
+  <div class="loc-box">
+    <div class="loc-pin">📍</div>
+    <div class="loc-text">
+      <h3>Vishnu's Headquarters</h3>
+      <p>3363 Sagewood Court<br>Pleasanton, CA</p>
+      <a class="map-link" href="https://maps.google.com/?q=3363+Sagewood+Ct,+Pleasanton,+CA" target="_blank">Open in Google Maps →</a>
+    </div>
+  </div>
+</section>
+
+<!-- 5 WORDS SECTION -->
+<section class="section words-section" style="padding-top: 60px; padding-bottom: 60px;">
+  <div class="section-badge">Your mission</div>
+  <h2>5 words that are Vishnu</h2>
+  <p>Think of Vishnu. Quick — what are the first 5 words that pop into your head? Don't overthink it. Enter your name and your words below, and they'll be added to the growing portrait of the man.</p>
+
+  <input class="name-input" type="text" id="submitter-name" placeholder="Your name (so we know who said what)">
+  <div class="word-inputs">
+    <input type="text" id="w1" placeholder="Word 1" maxlength="20">
+    <input type="text" id="w2" placeholder="Word 2" maxlength="20">
+    <input type="text" id="w3" placeholder="Word 3" maxlength="20">
+    <input type="text" id="w4" placeholder="Word 4" maxlength="20">
+    <input type="text" id="w5" placeholder="Word 5" maxlength="20">
+  </div>
+  <button class="generate-btn" onclick="submitWords()">✨ Add my words</button>
+  <p class="submit-notice" id="word-notice" style="display:none;"></p>
+
+  <div class="word-wall" id="wordWall" style="display:none;">
+    <h3>What the world says about Vishnu ✦</h3>
+    <div class="word-wall-entries" id="wordWallEntries"></div>
+  </div>
+</section>
+
+<!-- RSVP -->
+<section class="rsvp-section section" style="max-width: 100%; padding: 60px 24px;">
+  <div style="max-width: 680px; margin: 0 auto;">
+    <div class="section-badge">Don't leave us hanging</div>
+    <h2>Are you in?</h2>
+    <p>Please RSVP by <strong style="color:#ffd700;">May 16th</strong> so we know how many chairs to pull out and how much cake to order (the answer is always more cake).</p>
+    <div class="rsvp-form">
+      <div class="form-row">
+        <div class="form-group">
+          <label>Your Name</label>
+          <input type="text" id="rsvp-name" placeholder="Full name">
+        </div>
+        <div class="form-group">
+          <label>Your Email</label>
+          <input type="email" id="rsvp-email" placeholder="your@email.com">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Are you coming?</label>
+          <select id="rsvp-attending">
+            <option value="">Select...</option>
+            <option value="yes-solo">Yes, just me!</option>
+            <option value="yes-plus1">Yes, me + 1</option>
+            <option value="yes-family">Yes, the whole squad</option>
+            <option value="no">Sadly, can't make it</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Dietary needs?</label>
+          <input type="text" id="rsvp-diet" placeholder="Vegetarian, allergies, etc.">
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Your best Vishnu story or roast (optional — but strongly encouraged)</label>
+        <textarea id="rsvp-message" placeholder="Go on, don't hold back..."></textarea>
+      </div>
+      <button class="submit-btn" onclick="sendRSVP()">🎉 Send my RSVP!</button>
+      <p id="rsvp-feedback" style="text-align:center; margin-top:16px; font-size:0.9rem; color:#ffd700; display:none;"></p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <p>Celebrating <span class="gold">Vishnu's 50th Birthday</span> · May 23rd, 2025 · Pleasanton, CA</p>
+  <p style="margin-top: 8px;">Made with love, laughter, and a very stubborn refusal to hire a DJ.</p>
+</footer>
+
+<script>
+  // ---- WORD WALL (stored in memory, also emailed) ----
+  const wordSubmissions = [];
+
+  function submitWords() {
+    const submitterName = document.getElementById('submitter-name').value.trim();
+    const words = [
+      document.getElementById('w1').value.trim(),
+      document.getElementById('w2').value.trim(),
+      document.getElementById('w3').value.trim(),
+      document.getElementById('w4').value.trim(),
+      document.getElementById('w5').value.trim()
+    ].filter(Boolean);
+
+    const notice = document.getElementById('word-notice');
+
+    if (!submitterName) {
+      notice.style.display = 'block';
+      notice.style.color = '#a00';
+      notice.textContent = 'Please enter your name so we know who said what!';
+      return;
+    }
+    if (words.length < 3) {
+      notice.style.display = 'block';
+      notice.style.color = '#a00';
+      notice.textContent = 'Please enter at least 3 words!';
+      return;
+    }
+
+    wordSubmissions.push({ name: submitterName, words });
+    renderWordWall();
+
+    // Email to Shannthini
+    const subject = `Vishnu's 50th — Words from ${submitterName}`;
+    const body = `${submitterName}'s 5 words for Vishnu:\n\n${words.join(', ')}`;
+    window.location.href = `mailto:Shannthini@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+    // Clear inputs
+    document.getElementById('submitter-name').value = '';
+    ['w1','w2','w3','w4','w5'].forEach(id => document.getElementById(id).value = '');
+
+    notice.style.display = 'block';
+    notice.style.color = '#1a1a6e';
+    notice.textContent = `✓ Added! Your email client will open to send your words to us. Thanks, ${submitterName}!`;
+  }
+
+  function renderWordWall() {
+    const wall = document.getElementById('wordWall');
+    const entries = document.getElementById('wordWallEntries');
+    wall.style.display = 'block';
+    entries.innerHTML = wordSubmissions.map(s => `
+      <div class="word-entry">
+        <div class="from-name">According to ${s.name}</div>
+        <div class="word-tags-row">${s.words.map(w => `<span class="word-tag">${w}</span>`).join('')}</div>
+      </div>
+    `).join('');
+  }
+
+  // ---- RSVP ----
+  function sendRSVP() {
+    const name = document.getElementById('rsvp-name').value.trim();
+    const email = document.getElementById('rsvp-email').value.trim();
+    const attending = document.getElementById('rsvp-attending').value;
+    const diet = document.getElementById('rsvp-diet').value.trim();
+    const message = document.getElementById('rsvp-message').value.trim();
+    const fb = document.getElementById('rsvp-feedback');
+
+    if (!name || !attending) {
+      fb.style.display = 'block';
+      fb.style.color = '#ff9999';
+      fb.textContent = "Please fill in your name and whether you're attending!";
+      return;
+    }
+
+    const attendingMap = {
+      'yes-solo': 'Yes — just me!',
+      'yes-plus1': 'Yes — me + 1',
+      'yes-family': 'Yes — the whole squad',
+      'no': 'Sadly cannot make it'
+    };
+
+    const subject = `RSVP for Vishnu's 50th — ${name}`;
+    const body = `Name: ${name}
+Email: ${email || 'Not provided'}
+Attending: ${attendingMap[attending] || attending}
+Dietary needs: ${diet || 'None mentioned'}
+Message / Roast: ${message || 'None — but noted.'}`;
+
+    window.location.href = `mailto:Shannthini@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+    fb.style.display = 'block';
+    fb.style.color = '#ffd700';
+    fb.textContent = '✓ Your email client should open now. Hit send and you\'re done!';
+  }
+</script>
+</body>
+</html>
