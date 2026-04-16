@@ -333,29 +333,47 @@
     document.getElementById('result-tags').innerHTML = words.map(w => '<span class="word-tag">' + w + '</span>').join('');
     document.getElementById('result-sentence').innerHTML = '<span class="loading-text">Consulting the ancient scrolls of Vishnu wisdom...</span>';
 
+    let statement = fallback(words);
+
     try {
       const res = await fetch('https://api.anthropic.com/v1/messages', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           model: 'claude-sonnet-4-20250514',
-          max_tokens: 120,
+          max_tokens: 300,
           messages: [{
             role: 'user',
-            content: 'Someone used these words to describe Vishnu, who is turning 50: ' + words.join(', ') + '. Write ONE single punchy, funny, affectionate roast-style sentence (max 20 words) weaving all these words together. Think: something a best friend would say at a roast. No quotes, no markdown, just the sentence itself.'
+            content: 'Someone used these words to describe Vishnu, who is turning 50: ' + words.join(', ') + '. Write a funny, warm roast-style paragraph of 3-4 sentences that weaves ALL these words in cleverly. Make it absurdly specific and affectionate — like a best friend roasting him at his birthday party. Build up to a punchline at the end. Be genuinely funny, not generic. No bullet points, no markdown, just flowing funny prose.'
           }]
         })
       });
       const data = await res.json();
       const block = (data.content || []).find(b => b.type === 'text');
-      document.getElementById('result-sentence').textContent = block ? block.text : fallback(words);
-    } catch(e) {
-      document.getElementById('result-sentence').textContent = fallback(words);
-    }
+      if (block) statement = block.text;
+    } catch(e) {}
+
+    document.getElementById('result-sentence').textContent = statement;
+
+    // Also send to Formspree so Shannthini gets the words
+    try {
+      await fetch('https://formspree.io/f/xqewpgyw', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({
+          _subject: '5 Words about Vishnu from ' + name,
+          'Submitted by': name,
+          'Their 5 words': words.join(', '),
+          'The verdict': statement
+        })
+      });
+    } catch(e) {}
+
+    showNotice(notice, 'Your words have been sent! Scroll down to RSVP too.', false);
   }
 
   function fallback(words) {
-    return 'Vishnu in a nutshell: ' + words[0] + ', ' + words[1] + ', and somehow also ' + (words[2] || 'still going strong') + '.';
+    return 'Scientists have long debated what makes Vishnu tick — and after 50 years of evidence, the data is in: he is equal parts ' + words[0] + ' and ' + words[1] + ', with a completely unearned confidence about ' + (words[2] || 'everything') + '. Somehow he pairs this with ' + (words[3] || 'charm') + ' and just enough ' + (words[4] || 'wit') + ' that nobody calls him out. We have spent years trying to explain it. Science cannot. We have accepted this.';
   }
 
   function showNotice(el, msg, isError) {
