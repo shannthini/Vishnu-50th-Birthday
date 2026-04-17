@@ -2,7 +2,7 @@ export default async function handler(req, res) {
   try {
     const { name, words } = req.body || {};
 
-    if (!words || !Array.isArray(words)) {
+    if (!name || !words || !Array.isArray(words)) {
       return res.status(400).json({ error: "Invalid input" });
     }
 
@@ -30,7 +30,7 @@ Use all words naturally in 3-4 sentences.
     const data = await response.json();
 
     res.status(200).json({
-      text: data?.choices?.[0]?.message?.content || "Fallback triggered"
+      text: data?.choices?.[0]?.message?.content || "Vishnu’s story is temporarily unavailable."
     });
 
   } catch (err) {
