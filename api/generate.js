@@ -20,7 +20,7 @@ Use all words naturally in 3-4 sentences.
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        model: "openrouter/free",
+        model: "mistralai/mistral-small-3.1-24b-instruct:free",
         messages: [
           { role: "user", content: prompt }
         ]
