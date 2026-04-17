@@ -13,10 +13,8 @@ ${words.join(", ")}
 
 Write exactly 3 sentences.
 
-The sentences should sound like a real friend at a birthday party telling an oddly specific, affectionate, funny story about Vishnu.
-
+The sentences should sound like a real friend at a birthday party telling an oddly specific, affectionate, funny statements about Vishnu.
 Use every word naturally and meaningfully. Do not just list the words or turn them into generic compliments.
-
 Make the humor specific, vivid, and slightly exaggerated. Build toward a punchline in the final sentence.
 
 Avoid vague phrases like:
