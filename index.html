@@ -343,32 +343,25 @@
     let statement = fallback(words);
 
     try {
-     const res = await fetch('https://openrouter.ai/api/v1/chat/completions', {
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/json',
-    'Authorization': 'Bearer YOUR KEY',
-    'HTTP-Referer': 'https://shannthini.github.io/Vishnu-50th-Birthday/',
-    'X-Title': "Vishnu's 50th Birthday"
-  },
-  body: JSON.stringify({
-    model: 'anthropic/claude-haiku-4-5',
-    max_tokens: 300,
-    messages: [
-      {
-        role: 'system',
-        content: 'You write short, funny, affectionate roast-style paragraphs for birthday parties. You always produce exactly 3-4 sentences. You understand the meaning and context of words and weave them naturally into a coherent, funny narrative. Never use the words as mere placeholders — understand what they mean and use them meaningfully. No bullet points, no markdown, no introductory phrases like "Here is..." — just the paragraph itself.'
-      },
-      {
-        role: 'user',
-        content: 'Someone used these words to describe Vishnu, who is turning 50: ' + words.join(', ') + '. Write a funny, warm roast-style paragraph of 3-4 sentences that uses ALL these words naturally and meaningfully — understand what each word means and work it into a coherent, absurdly specific portrait of Vishnu. Build up to a punchline. Be genuinely funny, not generic.'
-      }
-    ]
-  })
-});
-const data = await res.json();
-const text = data.choices?.[0]?.message?.content;
-if (text) statement = text.trim();
+    try {
+  const res = await fetch('/api/generate', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      name,
+      words
+    })
+  });
+
+  const data = await res.json();
+  if (data?.text) {
+    statement = data.text.trim();
+  }
+} catch (e) {
+  // fallback already handles this
+}
     } catch(e) {}
 
     document.getElementById('result-sentence').textContent = statement;
