@@ -11,7 +11,7 @@ Vishnu is turning 50. Someone described him using these words:
 Name: ${name}
 ${words.join(", ")}
 
-Write exactly 3 sentences.
+Write exactly 3 sentences, not more than 6 to 7 words each. Gender is He. Do not use She. 
 
 The sentences should sound like a real friend at a birthday party telling an oddly specific, affectionate, funny statements about Vishnu.
 Use every word naturally and meaningfully. Do not just list the words or turn them into generic compliments.
