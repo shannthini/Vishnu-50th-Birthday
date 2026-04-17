@@ -1,14 +1,16 @@
 export default async function handler(req, res) {
   try {
-    const { words, name } = req.body;
+    const { name, words } = req.body || {};
+
+    if (!words || !Array.isArray(words)) {
+      return res.status(400).json({ error: "Invalid input" });
+    }
 
     const prompt = `
-You are writing a fun, witty, slightly exaggerated tribute for Vishnu's 50th birthday.
-
-Name of contributor: ${name}
-Words given: ${words.join(", ")}
-
-Turn these into one lively, human-sounding sentence. Do NOT list words. Make it flow naturally, slightly humorous and warm.
+Write a funny, warm roast-style paragraph about Vishnu turning 50.
+Name: ${name}
+Words: ${words.join(", ")}
+Use all words naturally in 3-4 sentences.
 `;
 
     const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
@@ -28,10 +30,11 @@ Turn these into one lively, human-sounding sentence. Do NOT list words. Make it 
     const data = await response.json();
 
     res.status(200).json({
-      text: data.choices?.[0]?.message?.content || fallback(words)
+      text: data?.choices?.[0]?.message?.content || "Fallback triggered"
     });
 
   } catch (err) {
-    res.status(500).json({ text: fallback(words) });
+    console.error(err);
+    res.status(500).json({ error: "Server crashed" });
   }
 }
