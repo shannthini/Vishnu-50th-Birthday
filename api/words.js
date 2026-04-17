@@ -1,0 +1,24 @@
+export default async function handler(req, res) {
+  if (req.method !== 'POST') return res.status(405).end();
+
+  const { name, words, statement } = req.body;
+
+  try {
+    await fetch('https://api.resend.com/emails', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${process.env.RESEND_API_KEY}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        from: 'onboarding@resend.dev',
+        to: 'Shannthini@gmail.com',
+        subject: `5 Words about Vishnu — from ${name}`,
+        text: `From: ${name}\nWords: ${words}\nThe verdict: ${statement}`
+      })
+    });
+    res.status(200).json({ ok: true });
+  } catch(e) {
+    res.status(500).json({ ok: false });
+  }
+}
