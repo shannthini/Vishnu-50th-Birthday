@@ -20,7 +20,7 @@ Use all words naturally in 3-4 sentences.
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        model: "qwen/qwen3.6-plus:free",
+        model: "openrouter/free",
         messages: [
           { role: "user", content: prompt }
         ]
