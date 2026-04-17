@@ -27,11 +27,16 @@ Use all words naturally in 3-4 sentences.
       })
     });
 
-    const data = await response.json();
+  const data = await response.json();
 
-    res.status(200).json({
-      text: data?.choices?.[0]?.message?.content || "Vishnu’s story is temporarily unavailable."
-    });
+console.log("OpenRouter response:", JSON.stringify(data, null, 2));
+
+res.status(200).json({
+  text:
+    data?.choices?.[0]?.message?.content ||
+    data?.error?.message ||
+    JSON.stringify(data)
+});
 
   } catch (err) {
     console.error(err);
