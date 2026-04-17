@@ -9,10 +9,25 @@ export default async function handler(req, res) {
     const prompt = `
 Vishnu is turning 50. Someone described him using these words:
 Name: ${name}
-Words: ${words.join(", ")}
+${words.join(", ")}
 
-Write exactly 3 funny, affectionate sentences that naturally use all the words. Make it sound like a real friend telling a story at a birthday party. Write exactly 3 funny, affectionate sentences. Use every word naturally. Make it sound like a close friend telling a vivid, oddly specific story at a birthday party. No generic compliments. No AI-sounding phrases.
-Avoid generic compliments and avoid sounding like AI.
+Write exactly 3 sentences.
+
+The sentences should sound like a real friend at a birthday party telling an oddly specific, affectionate, funny story about Vishnu.
+
+Use every word naturally and meaningfully. Do not just list the words or turn them into generic compliments.
+
+Make the humor specific, vivid, and slightly exaggerated. Build toward a punchline in the final sentence.
+
+Avoid vague phrases like:
+- "pure joy"
+- "loving moments"
+- "shared chaos"
+- "cute memories"
+- "no one missed a detail"
+
+The tone should feel like:
+"He somehow manages to be both incredibly organized and the man who once brought a spreadsheet to a barbecue. If you give Vishnu a 'quick' decision, he’ll return 14 minutes later with three backup plans, two jokes, and a detailed risk analysis. Honestly, turning 50 is the first reckless thing he’s done in years."
 `;
 
     const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
