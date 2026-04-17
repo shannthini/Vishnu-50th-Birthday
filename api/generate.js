@@ -11,7 +11,8 @@ Vishnu is turning 50. Someone described him using these words:
 Name: ${name}
 Words: ${words.join(", ")}
 
-Write exactly 3 funny, affectionate sentences that naturally use all the words. Make it sound like a real friend telling a story at a birthday party. Avoid generic compliments and avoid sounding like AI.
+Write exactly 3 funny, affectionate sentences that naturally use all the words. Make it sound like a real friend telling a story at a birthday party. Write exactly 3 funny, affectionate sentences. Use every word naturally. Make it sound like a close friend telling a vivid, oddly specific story at a birthday party. No generic compliments. No AI-sounding phrases.
+Avoid generic compliments and avoid sounding like AI.
 `;
 
     const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
