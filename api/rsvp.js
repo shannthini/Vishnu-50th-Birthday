@@ -12,7 +12,7 @@ export default async function handler(req, res) {
       },
       body: JSON.stringify({
         from: 'onboarding@resend.dev',
-        to: 'Shannthini@gmail.com',
+        to: 'YOUR_RESEND_SIGNUP_EMAIL',
         subject: `RSVP for Vishnu's 50th — ${name}`,
         text: `Name: ${name}\nParty size: ${count}\nDietary needs: ${diet || 'None'}`
       })
