@@ -368,16 +368,15 @@ if (data?.text) {
 
     // Also send to Formspree so Shannthini gets the words
     try {
-      await fetch('https://formspree.io/f/xqewpgyw', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        body: JSON.stringify({
-          _subject: '5 Words about Vishnu from ' + name,
-          'Submitted by': name,
-          'Their 5 words': words.join(', '),
-          'The verdict': statement
-        })
-      });
+     await fetch('/api/words', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({
+    name: name,
+    words: words.join(', '),
+    statement: statement
+  })
+});
     } catch(e) {}
 
     showNotice(notice, 'Your words have been sent! Scroll down to RSVP too.', false);
@@ -393,13 +392,6 @@ if (data?.text) {
     el.textContent = msg;
   }
 
-  /* ---------- RSVP via Formspree ----------
-     Steps to activate:
-     1. Go to formspree.io and sign up (free)
-     2. Create a new form — name it "Vishnu 50th RSVP"
-     3. Copy your form endpoint (looks like https://formspree.io/f/xxxxxxxx)
-     4. Replace REPLACE_ME below with your actual endpoint ID
-  ----------------------------------------- */
   const FORMSPREE_URL = 'https://formspree.io/f/xqewpgyw';
 
   async function submitRSVP() {
@@ -416,15 +408,12 @@ if (data?.text) {
     errEl.style.display = 'none';
 
     try {
-      const res = await fetch(FORMSPREE_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        body: JSON.stringify({
-          Name: name,
-          'Party size': count,
-          'Dietary needs': diet || 'None'
-        })
-      });
+     const res = await fetch('/api/rsvp', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({ name, count, diet })
+});
+    
 
       if (res.ok) {
         document.getElementById('rsvp-form-wrap').style.display = 'none';
