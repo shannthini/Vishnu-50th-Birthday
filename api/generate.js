@@ -21,7 +21,7 @@ Write exactly 3 funny, affectionate sentences that naturally use all the words. 
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        model: "mistralai/mistral-small-3.1-24b-instruct:free",
+        model: "openrouter/free",
         messages: [
           { role: "user", content: prompt }
         ]
