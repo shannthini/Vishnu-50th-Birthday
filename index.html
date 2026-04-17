@@ -345,20 +345,20 @@
     try {
     try {
   const res = await fetch('/api/generate', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-      name,
-      words
-    })
-  });
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify({
+    name,
+    words
+  })
+});
 
-  const data = await res.json();
-  if (data?.text) {
-    statement = data.text.trim();
-  }
+const data = await res.json();
+if (data?.text) {
+  statement = data.text.trim();
+}
 } catch (e) {
   // fallback already handles this
 }
