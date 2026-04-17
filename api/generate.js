@@ -7,10 +7,11 @@ export default async function handler(req, res) {
     }
 
     const prompt = `
-Write a funny, warm roast-style paragraph about Vishnu turning 50.
+Vishnu is turning 50. Someone described him using these words:
 Name: ${name}
 Words: ${words.join(", ")}
-Use all words naturally in 3-4 sentences.
+
+Write exactly 3 funny, affectionate sentences that naturally use all the words. Make it sound like a real friend telling a story at a birthday party. Avoid generic compliments and avoid sounding like AI.
 `;
 
     const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
