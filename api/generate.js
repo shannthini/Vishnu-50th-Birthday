@@ -12,7 +12,6 @@ Name: ${name}
 ${words.join(", ")}
 
 Write exactly 3 sentences, not more than 6 to 7 words each. Gender is He. Do not use She. 
-
 The sentences should sound like a real friend at a birthday party telling an oddly specific, affectionate, funny statements about Vishnu.
 Use every word naturally and meaningfully. Do not just list the words or turn them into generic compliments.
 Make the humor specific, vivid, and slightly exaggerated. Build toward a punchline in the final sentence.
@@ -23,7 +22,6 @@ Avoid vague phrases like:
 - "shared chaos"
 - "cute memories"
 - "no one missed a detail"
-
 The tone should feel like:
 "He somehow manages to be both incredibly organized and the man who once brought a spreadsheet to a barbecue. If you give Vishnu a 'quick' decision, he’ll return 14 minutes later with three backup plans, two jokes, and a detailed risk analysis. Honestly, turning 50 is the first reckless thing he’s done in years."
 `;
